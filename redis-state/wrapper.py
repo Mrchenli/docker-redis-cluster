@@ -40,7 +40,7 @@ def start_redis_stat(redis_live_url):
 
 @zk.ChildrenWatch('/redis/nodes')
 def watch_children(children):
-    with zk.Lock('/redis/master', "master-update") as lock:
+    with zk.Lock('/redis/nodes', "master-update") as lock:
         # 先获取cluster信息 如果是第一次cluster
         redis_cluster_url = zk.get(redis_cluster)[0]
         redis_live_url = get_redis_live_url(children)
