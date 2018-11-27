@@ -52,6 +52,7 @@ RUN set -ex \
 		tar \
 		xz \
 		yaml-dev \
+		ncurses \
 		zlib-dev \
 	\
 	&& wget -O ruby.tar.xz "https://cache.ruby-lang.org/pub/ruby/${RUBY_MAJOR%-rc}/ruby-$RUBY_VERSION.tar.xz" \
@@ -126,7 +127,6 @@ RUN mkdir -p "$GEM_HOME" && chmod 777 "$GEM_HOME"
 
 RUN gem install redis-stat
 
-RUN apk add ncurses
 
 COPY wrapper.py /
 
