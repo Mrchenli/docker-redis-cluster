@@ -23,8 +23,7 @@ RUN set -ex; \
 		wget \
 		\
 		gcc \
-		libc6-dev \
-		make \
+		libc-dev \
 	'; \
 	apk add $buildDeps; \
 	rm -rf /var/lib/apt/lists/*; \
