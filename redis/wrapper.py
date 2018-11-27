@@ -55,5 +55,6 @@ cmd = get_master_cmd()
 try:
     print("Running: " + str(cmd))
     subprocess.call(cmd)
+    subprocess.run("tail -f /data/redis_7000.log", shell=True)
 except:
     print("Exiting...")

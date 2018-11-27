@@ -1,0 +1,24 @@
+version: '3.3'
+services:
+
+  zk:
+    image: zookeeper
+    restart: always
+    hostname: zk
+
+
+  zkui:
+    image: maauso/zkui
+    restart: always
+    hostname: zkui
+    ports:
+      - 9090:9090
+    environment:
+      ZKLIST: zk:2181
+    depends_on:
+      - zk
+
+networks:
+  default:
+    external:
+      name: redis-cluster

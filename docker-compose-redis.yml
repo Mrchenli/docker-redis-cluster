@@ -21,11 +21,11 @@ services:
       replicas: 1
       restart_policy:
         condition: on-failure
-    image: mrchenli/redis-state:1.0.0
+    image: mrchenli/redis-stat:3.0.0
     environment:
       PORT: 7006
       ZK_HOSTS: zk:2181
-    container_name: redis-state
+    container_name: redis-stat
     ports:
     - target: 7006
       published: 7006
@@ -33,23 +33,6 @@ services:
       mode: host
     depends_on:
       - redis-cluster
-
-  zk:
-    image: zookeeper
-    restart: always
-    hostname: zk
-
-
-  zkui:
-    image: maauso/zkui
-    restart: always
-    hostname: zkui
-    ports:
-      - 9090:9090
-    environment:
-      ZKLIST: zk:2181
-    depends_on:
-      - zk
 
 networks:
   default:
