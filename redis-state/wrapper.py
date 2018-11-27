@@ -2,8 +2,6 @@ from kazoo.client import KazooClient
 import os, time, shlex, subprocess, sys
 
 zk_hosts = os.environ.get("ZK_HOSTS") or '127.0.0.1:2181'
-bind_ip = os.environ.get("BIND_IP") or '127.0.0.1'  # add by kiibos
-interface = os.environ.get("NET_IFACE") or 'eth0'
 port = os.environ.get("PORT") or "63790"
 
 # uid = str(uuid.uuid4())
@@ -17,7 +15,6 @@ redis_cluster = '/redis/cluster'
 def get_cluster_cmd(cluster_url):
     c = "echo yes | redis-cli --cluster create --cluster-replicas 1 {}".format(cluster_url)
     return c
-    #return shlex.split(c)
 
 
 def get_redis_live_url(children):

@@ -2,7 +2,7 @@ from kazoo.client import KazooClient
 import os, shlex, subprocess, socket, fcntl, struct
 
 zk_hosts = os.environ.get("ZK_HOSTS") or '127.0.0.1:2181'
-bind_ip = os.environ.get("BIND_IP") or '127.0.0.1'  # add by kiibos
+bind_ip = os.environ.get("BIND_IP")
 interface = os.environ.get("NET_IFACE") or 'eth0'
 port = os.environ.get("PORT") or "7000"
 
