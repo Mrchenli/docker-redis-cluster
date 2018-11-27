@@ -26,8 +26,7 @@ RUN set -ex; \
 		libc6-dev \
 		make \
 	'; \
-	apt-get update; \
-	apt-get install -y $buildDeps --no-install-recommends; \
+	apk add $buildDeps; \
 	rm -rf /var/lib/apt/lists/*; \
 	\
 	wget -O redis.tar.gz "$REDIS_DOWNLOAD_URL"; \
@@ -49,12 +48,8 @@ RUN set -ex; \
 	make -C /usr/src/redis -j "$(nproc)"; \
 	make -C /usr/src/redis install; \
 	\
-	rm -r /usr/src/redis; \
-	\
-	apt-get purge -y --auto-remove $buildDeps
-
+	rm -r /usr/src/redis;
 ###=======> redis 安装完成
-
 
 COPY wrapper.py /
 
