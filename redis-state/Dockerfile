@@ -2,4 +2,6 @@ FROM ruby:2.4
 
 RUN gem install redis-stat
 
-ENTRYPOINT ["python3","/etc/redis/wrapper.py"]
+COPY wrapper.py /
+
+ENTRYPOINT ["python3","/wrapper.py"]

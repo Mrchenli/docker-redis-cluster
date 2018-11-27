@@ -1,0 +1,57 @@
+version: '3.3'
+services:
+  redis-cluster:
+    deploy:
+        mode: replicated
+        replicas: 6
+        restart_policy:
+          condition: on-failure
+    image: mrchenli/redis-cluster:1.0.0
+    environment:
+      PORT: 7000
+      ZK_HOSTS: zk:2181
+      NET_IFACE: eth0
+    container_name: redis-cluster
+    depends_on:
+      - zkui
+
+  redis-state:
+    deploy:
+      mode: replicated
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    image: mrchenli/redis-state:1.0.0
+    environment:
+      PORT: 7006
+      ZK_HOSTS: zk:2181
+    container_name: redis-state
+    ports:
+    - target: 7006
+      published: 7006
+      protocol: tcp
+      mode: host
+    depends_on:
+      - redis-cluster
+
+  zk:
+    image: zookeeper
+    restart: always
+    hostname: zk
+
+
+  zkui:
+    image: maauso/zkui
+    restart: always
+    hostname: zkui
+    ports:
+      - 9090:9090
+    environment:
+      ZKLIST: zk:2181
+    depends_on:
+      - zk
+
+networks:
+  default:
+    external:
+      name: redis-cluster
