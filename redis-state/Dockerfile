@@ -126,6 +126,8 @@ RUN mkdir -p "$GEM_HOME" && chmod 777 "$GEM_HOME"
 
 RUN gem install redis-stat
 
+RUN apk add ncurses
+
 COPY wrapper.py /
 
 ENTRYPOINT ["python3","/wrapper.py"]
