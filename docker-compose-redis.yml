@@ -6,7 +6,7 @@ services:
         replicas: 6
         restart_policy:
           condition: on-failure
-    image: mrchenli/redis-cluster:1.0.0
+    image: mrchenli/redis-cluster:3.0.0
     environment:
       PORT: 7000
       ZK_HOSTS: zk:2181
@@ -14,25 +14,6 @@ services:
     container_name: redis-cluster
     depends_on:
       - zkui
-
-  redis-state:
-    deploy:
-      mode: replicated
-      replicas: 1
-      restart_policy:
-        condition: on-failure
-    image: mrchenli/redis-stat:3.0.0
-    environment:
-      PORT: 7006
-      ZK_HOSTS: zk:2181
-    container_name: redis-stat
-    ports:
-    - target: 7006
-      published: 7006
-      protocol: tcp
-      mode: host
-    depends_on:
-      - redis-cluster
 
 networks:
   default:

@@ -9,3 +9,9 @@ sleep 5s
 
 docker stack deploy -c docker-compose-redis.yml redis_cluster
 echo "redis is up ..."
+
+sleep 10s
+
+
+docker stack deploy -c docker-compose-redis-stat.yml redis_cluster
+echo "redis-stat is up ..."

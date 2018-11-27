@@ -1,0 +1,25 @@
+version: '3.3'
+services:
+  redis-state:
+    deploy:
+      mode: replicated
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    image: mrchenli/redis-stat:3.0.0
+    environment:
+      PORT: 7008
+      ZK_HOSTS: zk:2181
+    container_name: redis-stat
+    ports:
+    - target: 7008
+      published: 7008
+      protocol: tcp
+      mode: host
+    depends_on:
+      - redis-cluster
+
+networks:
+  default:
+    external:
+      name: redis-cluster
