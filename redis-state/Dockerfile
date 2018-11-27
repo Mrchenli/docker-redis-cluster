@@ -1,8 +1,8 @@
 FROM ruby:2.4-alpine3.8
 
 RUN apk update && \
-    apk add python3 && \
     apk add build-essential && \
+    apk add python3 && \
     pip3 install -r /etc/redis/requirements.txt
 
 RUN gem install redis-stat
