@@ -5,6 +5,7 @@ ADD requirements.txt /etc/redis/
 RUN apk update && \
     apk add build-base && \
     apk add ruby && \
+    apk add ruby-dev  && \
     apk add python3 && \
     pip3 install -r /etc/redis/requirements.txt
 
