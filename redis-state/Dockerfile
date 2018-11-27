@@ -1,11 +1,11 @@
-FROM ruby:2.4
+FROM ruby:2.4-alpine3.8
 
 RUN gem install redis-stat
 
 ADD requirements.txt /etc/redis/
 
-RUN apt-get update && \
-    apt-get install python3 && \
+RUN apk update && \
+    apk add python3 && \
     pip3 install -r /etc/redis/requirements.txt
 
 COPY wrapper.py /
