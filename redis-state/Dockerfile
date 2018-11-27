@@ -1,5 +1,8 @@
 FROM ruby:2.4-alpine3.8
 
+
+ADD requirements.txt /etc/redis/
+
 RUN apk update && \
     apk add build-base && \
     apk add python3 && \
@@ -7,7 +10,6 @@ RUN apk update && \
 
 RUN gem install redis-stat
 
-ADD requirements.txt /etc/redis/
 
 COPY wrapper.py /
 
