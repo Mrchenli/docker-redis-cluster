@@ -10,6 +10,7 @@ RUN apk update && \
     pip3 install -r /etc/redis/requirements.txt
 
 
+RUN gem install rdoc
 RUN gem install redis-stat
 
 
