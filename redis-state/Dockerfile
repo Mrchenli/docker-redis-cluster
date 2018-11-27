@@ -15,9 +15,9 @@ RUN mkdir -p /usr/local/etc \
 		echo 'update: --no-document'; \
 	} >> /usr/local/etc/gemrc
 
-ENV RUBY_MAJOR 2.3
-ENV RUBY_VERSION 2.3.8
-ENV RUBY_DOWNLOAD_SHA256 910f635d84fd0d81ac9bdee0731279e6026cb4cd1315bbbb5dfb22e09c5c1dfe
+ENV RUBY_MAJOR 2.6-rc
+ENV RUBY_VERSION 2.6.0-preview3
+ENV RUBY_DOWNLOAD_SHA256 9856d9e0e32df9e5cdf01928eec363d037f1a76dab2abbf828170647beaf64fe
 ENV RUBYGEMS_VERSION 2.7.8
 ENV BUNDLER_VERSION 1.17.1
 
@@ -122,6 +122,7 @@ ENV BUNDLE_PATH="$GEM_HOME" \
 ENV PATH $GEM_HOME/bin:$BUNDLE_PATH/gems/bin:$PATH
 # adjust permissions of a few directories for running "gem install" as an arbitrary user
 RUN mkdir -p "$GEM_HOME" && chmod 777 "$GEM_HOME"
+# (BUNDLE_PATH = GEM_HOME, no need to mkdir/chown both)
 
 RUN gem install redis-stat
 
