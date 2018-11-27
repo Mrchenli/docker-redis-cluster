@@ -4,14 +4,35 @@ ADD requirements.txt /etc/redis/
 
 RUN apk update && \
     apk add build-base && \
-    apk add ruby && \
-    apk add ruby-dev  && \
     apk add python3 && \
     pip3 install -r /etc/redis/requirements.txt
 
 
-RUN gem install rdoc
-RUN gem install redis-stat
+RUN apk update \
+&& apk add ruby \
+           ruby-bigdecimal \
+           ruby-bundler \
+           ruby-io-console \
+           ruby-irb \
+           ca-certificates \
+           libressl \
+           less \
+&& apk add --virtual build-dependencies \
+           build-base \
+           ruby-dev \
+           libressl-dev \
+\
+&& bundle config build.nokogiri --use-system-libraries \
+&& bundle config git.allow_insecure true \
+&& gem install json --no-rdoc --no-ri \
+&& gem install redis-stat \
+\
+&& gem cleanup \
+&& apk del build-dependencies \
+&& rm -rf /usr/lib/ruby/gems/*/cache/* \
+          /var/cache/apk/* \
+          /tmp/* \
+          /var/tmp/*
 
 
 COPY wrapper.py /
