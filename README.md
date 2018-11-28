@@ -18,3 +18,9 @@
     ZK_HOSTS
     PORT
 ```
+
+```json
+问题：
+1.动态ip问题 怎么解决
+2.跨主机的volume + slot 可以解决数据存储的问题
+```
